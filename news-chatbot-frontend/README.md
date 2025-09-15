@@ -1,296 +1,307 @@
 # 🤖 News Chatbot Frontend
 
-A modern, real-time chat interface built with **React, TypeScript, and Socket.IO** that delivers an engaging conversational experience with an AI-powered news assistant. Think of it as having a **friendly news expert right in your browser** who's always ready to chat about current events!
+<div align="center">
 
-## ✨ What This Does
+A modern, real-time chat interface built with **React, TypeScript, and Socket.IO** that delivers an engaging conversational experience with an AI-powered news assistant.
 
-This frontend application provides:
+![React](https://img.shields.io
 
-- 💬 **Real-time Chat Interface** - Instant messaging with typing indicators
-- 🤖 **AI Conversation** - Smart responses about news and current events
-- 📱 **Responsive Design** - Works beautifully on desktop and mobile
-- ⚡ **Socket.IO Integration** - Lightning-fast real-time communication
-- 💾 **Session Persistence** - Remembers your conversation history
-- 🎨 **Modern SCSS Styling** - Clean, professional appearance
 
-## 🎯 Key Features
+![TypeScript](https://img.shields.io/badge/Type://img.shields.io/badge/Socket.IO-4.0img.shields.io/badge/Vite-5.0-646CFF?logo=vite 📋 Table of Contents
 
-### Real-Time Experience
+- [✨ Features](#-features)
+- [🚀 Quick Start](#-quick-start)
+- [🏗️ Project Structure](#️-project-structure)
+- [🎨 Tech Stack](#-tech-stack)
+- [🔄 How It Works](#-how-it-works)
+- [🧩 Components](#-components)
+- [🎨 Styling Architecture](#-styling-architecture)
+- [🔌 Real-Time Features](#-real-time-features)
+- [📱 Responsive Design](#-responsive-design)
+- [🐛 Troubleshooting](#-troubleshooting)
+- [🚀 Deployment](#-deployment)
 
-- ⌨️ **Live typing indicators** when the AI is thinking
-- 📨 **Instant message delivery** via WebSocket
-- 🔄 **Automatic reconnection** if connection drops
-- 💬 **Typewriter effect** for AI responses
+## ✨ Features
 
-### Smart Conversation Management
+### 💬 Real-Time Experience
+- **Live typing indicators** when the AI is thinking
+- **Instant message delivery** via WebSocket
+- **Automatic reconnection** if connection drops
+- **Typewriter effect** for AI responses
 
-- 🎭 **Persistent sessions** across browser refreshes
-- 📚 **Full chat history** preservation
-- 🗑️ **Easy conversation reset** with one click
-- 🔍 **Source citations** for news responses
+### 🧠 Smart Conversation Management
+- **Persistent sessions** across browser refreshes
+- **Full chat history** preservation
+- **Easy conversation reset** with one click
+- **Source citations** for news responses
 
-### Developer-Friendly Architecture
-
-- 📦 **Component-based** React architecture
-- 🔒 **TypeScript** for type safety
-- 🎨 **SCSS modules** for organized styling
-- 🪝 **Custom hooks** for state management
+### 👨‍💻 Developer-Friendly Architecture
+- **Component-based** React architecture
+- **TypeScript** for type safety
+- **SCSS modules** for organized styling
+- **Custom hooks** for state management
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-
 - Node.js (v18 or higher)
 - NPM or Yarn
-- Running backend server (see backend README)
+- Running backend server
 
-### 1. Clone & Install
+### Installation
 
+```bash
+# Clone the repository
 git clone <your-repo-url>
 cd news-chatbot-frontend
 
-### 2. Environment Setup
+# Install dependencies
+npm install
+```
 
-Create a `.env` file:
+### Environment Setup
+
+Create a `.env` file in the root directory:
+
+```env
 VITE_API_URL=http://localhost:3001
-VITE_SOCKET_URLhttp://localhost:3001
+VITE_SOCKET_URL=http://localhost:3001
+```
 
-### 3. Start Development Server
+### Start Development
 
+```bash
 npm run dev
+```
 
-Your chat interface will be available at `http://localhost:5173`
+Your chat interface will be available at `http://localhost:5173` 🎉
 
 ## 🏗️ Project Structure
 
-```bash
+```
 frontend/
 ├── src/
-│   ├── components/          # React UI components
+│   ├── components/              # React UI components
 │   │   ├── ChatInterface.tsx
 │   │   ├── MessageList.tsx
 │   │   ├── MessageInput.tsx
 │   │   └── TypingIndicator.tsx
-│   ├── context/             # React Context providers
+│   ├── context/                 # React Context providers
 │   │   └── SocketContext.tsx
-│   ├── hooks/               # Custom React hooks
+│   ├── hooks/                   # Custom React hooks
 │   │   ├── useChat.ts
 │   │   └── useSession.ts
-│   ├── services/            # API communication
+│   ├── services/                # API communication
 │   │   └── api.ts
-│   ├── types/               # TypeScript definitions
+│   ├── types/                   # TypeScript definitions
 │   │   └── index.ts
-│   ├── utils/               # Helper functions
+│   ├── utils/                   # Helper functions
 │   │   └── sessionUtils.ts
-│   ├── styles/              # SCSS styling
-│   │   ├── _variables.scss
-│   │   ├── _mixins.scss
-│   │   ├── _backgrounds.scss
-│   │   ├── App.scss
-│   │   └── components/      # Component-specific styles
-│   ├── App.tsx              # Main application component
-│   └── main.tsx             # Application entry point
-├── index.html               # HTML template
-├── package.json             # Dependencies & scripts
+│   └── styles/                  # SCSS styling
+│       ├── _variables.scss
+│       ├── _mixins.scss
+│       ├── _backgrounds.scss
+│       ├── App.scss
+│       └── components/          # Component-specific styles
+├── public/                      # Static assets
+├── index.html                   # HTML template
+├── package.json                 # Dependencies & scripts
+├── tsconfig.json               # TypeScript configuration
+├── vite.config.ts              # Vite configuration
+└── README.md                   # This file
+```
 
 ## 🎨 Tech Stack
 
-- **Frontend Framework**: React 18 with TypeScript
-- **Real-time Communication**: Socket.IO Client
-- **Styling**: SCSS with component modules
-- **Build Tool**: Vite
-- **HTTP Client**: Axios
-- **State Management**: React Hooks + Context
+| Technology | Purpose |
+|------------|---------|
+| **React 18** | Frontend framework with hooks |
+| **TypeScript** | Type safety and better DX |
+| **Socket.IO Client** | Real-time communication |
+| **SCSS** | Styling with component modules |
+| **Vite** | Fast build tool and dev server |
+| **Axios** | HTTP client for API calls |
 
 ## 🔄 How It Works
 
-### The Chat Flow
-
-👤 User types message
-↓ 2. 📨 Send via Socket
-
-to backend
-
-⌨️ Show "AI is thinking..." indicator
-
-🤖 Receive AI response via Socket.IO
-
-✨ Display with typewriter effect
-
-📚 Show news sources if available
+### Chat Flow
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant Backend
+    participant AI
+    
+    User->>Frontend: Types message
+    Frontend->>Backend: Send via Socket.IO
+    Frontend->>User: Show "AI thinking..."
+    Backend->>AI: Process message
+    AI->>Backend: Generate response
+    Backend->>Frontend: Send response via Socket
+    Frontend->>User: Display with typewriter effect
+```
 
 ### Session Management
+1. 🆔 Generate unique session ID
+2. 💾 Store in localStorage
+3. 🔌 Connect to Socket.IO room
+4. 📚 Load conversation history
+5. 💬 Ready for real-time chat!
 
-🆔 Generate unique session ID
-↓ 2. 💾
-
-🔌 Connect to Socket.IO room
-
-📚 Load conversation history
-
-💬 Ready for real-time chat!
-
-## 🛠️ Available Scripts
-
-Development
-npm run dev # Start development server
-npm run build # Build for production
-
-Code Quality
-npm run lint # Run ESLint
-npm run
-
-## 🧩 Component Overview
+## 🧩 Components
 
 ### 💬 ChatInterface
-
-_"The main stage where conversations come to life"_
-
-- Orchestrates the entire chat experience
-- Manages message display and input
-- Handles session reset functionality
+The main orchestrator that manages the entire chat experience.
+- Handles message display and input
+- Manages session reset functionality
+- Coordinates between child components
 
 ### 📝 MessageList
-
-_"The conversation history keeper with style"_
-
-- Displays chat messages with proper formatting
-- Implements typewriter effect for AI responses
-- Shows source citations and timestamps
+Displays conversation history with rich formatting.
+- Typewriter effect for AI responses
+- Source citations and timestamps
+- Auto-scroll to latest messages
 
 ### ⌨️ MessageInput
-
-_"The smart text box that understands you"_
-
-- Auto-resizing textarea for comfortable typing
-- Enter-to-send with Shift+Enter for new lines
-- Loading states and input validation
+Smart input component with enhanced UX.
+- Auto-resizing textarea
+- Enter-to-send, Shift+Enter for new lines
+- Loading states and validation
 
 ### 🤖 TypingIndicator
+Visual feedback for AI processing.
+- Animated dots with smooth transitions
+- Appears/disappears based on AI status
 
-_"The visual cue that AI is working hard"_
+## 🎨 Styling Architecture
 
-- Animated dots showing AI is processing
-- Smooth appearance/disappearance transitions
+Our SCSS follows a modular, scalable approach:
 
-## 🎨 SCSS Architecture
-
-Our styling follows a modular approach:
-
-// Core styling foundation
+```scss
 styles/
-├── \_variables.scss # Colors, fonts, breakpoints
-├── \_mixins.scss # Reusable style patterns
-├── \_backgrounds.scss # Background patterns & gradients
-├── App.scss # Global application styles
-└── components/ # Component-specific styles
-├── chat-interface.scss
-├── message-list.scss
-├── message-input.scss
-├── typing-indicator.scss
+├── _variables.scss      # Colors, fonts, breakpoints
+├── _mixins.scss         # Reusable style patterns
+├── _backgrounds.scss    # Background patterns & gradients
+├── App.scss            # Global application styles
+└── components/         # Component-specific styles
+    ├── chat-interface.scss
+    ├── message-list.scss
+    ├── message-input.scss
+    └── typing-indicator.scss
+```
 
 ### Design System
-
-- 🎨 **Modern color palette** with dark/light theme support
-- 📱 **Mobile-first responsive design**
-- ✨ **Smooth animations** and transitions
-- 🔤 **Typography hierarchy** for readability
+- 🎨 Modern color palette with theme support
+- 📱 Mobile-first responsive design
+- ✨ Smooth animations and transitions
+- 🔤 Clear typography hierarchy
 
 ## 🔌 Real-Time Features
 
 ### Socket.IO Events
 
+```typescript
 // Outgoing events (to server)
-'join-session' // Connect to chat room
-'chat-message' // Send user message
+socket.emit('join-session', sessionId);
+socket.emit('chat-message', message);
+
 // Incoming events (from server)
-'session-history' // Load past messages
-'message-added' // New message received
-'bot-typing' // AI thinking status
+socket.on('session-history', handleHistory);
+socket.on('message-added', handleNewMessage);
+socket.on('bot-typing', handleTypingStatus);
+```
 
 ### Connection Management
-
-- 🔄 **Auto-reconnection** on network issues
-- ⚡ **Connection status** indicators
-- 🛡️ **Error handling** with user feedback
+- 🔄 Auto-reconnection on network issues
+- ⚡ Connection status indicators
+- 🛡️ Error handling with user feedback
 
 ## 📱 Responsive Design
 
-The interface adapts beautifully across devices:
+| Device | Breakpoint | Layout |
+|--------|------------|---------|
+| **Desktop** | 1200px+ | Full sidebar with spacious messaging |
+| **Tablet** | 768-1199px | Compact layout, touch-friendly |
+| **Mobile** | 320-767px | Single column, thumb-optimized |
 
-- **Desktop** (1200px+): Full sidebar layout with spacious messaging
-- **Tablet** (768px-1199px): Compact layout with touch-friendly controls
-- **Mobile** (320px-767px): Single-column design optimized for thumbs
+## 🛠️ Available Scripts
 
-## 🎯 Best Practices Implemented
+```bash
+# Development
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run preview      # Preview production build
 
-### TypeScript Integration
-
-// Strong typing for all props and state
-interface ChatMessage {
-id: string; role: 'user' | 'assistant'; content: string; timestamp: string; sources?: string[];}
-
-### React Performance
-
-- ⚡ **useCallback** for stable function references
-- 🎯 **useMemo** for expensive calculations
-- 🔄 **useEffect** cleanup for memory management
-- 📦 **Component splitting** for code organization
-
-### Error Boundaries
-
-- 🛡️ **Graceful error handling** at component level
-- 📝 **User-friendly error messages**
-- 🔄 **Recovery mechanisms** for network issues
+# Code Quality
+npm run lint         # Run ESLint
+npm run type-check   # TypeScript type checking
+```
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+<details>
+<summary><strong>Socket connection fails</strong></summary>
 
-**Socket connection fails:**
-Check backend server is running
-curl http://localhost:3001/api/health
+1. Check if backend server is running:
+   ```bash
+   curl http://localhost:3001/api/health
+   ```
 
-Verify environment variables
-echo $VITE_SOCKET_URL
+2. Verify environment variables:
+   ```bash
+   echo $VITE_SOCKET_URL
+   ```
 
-**Messages not appearing:**
+3. Check browser console for WebSocket errors
+</details>
 
-- Check browser console for WebSocket errors
-- Verify session ID is consistent
-- Test with backend health endpoint
+<details>
+<summary><strong>Messages not appearing</strong></summary>
 
-**Styling issues:**
+1. Verify session ID consistency in localStorage
+2. Test backend health endpoint
+3. Check browser console for errors
+4. Try refreshing the page
+</details>
 
-- Clear browser cache and restart dev server
-- Check SCSS compilation in terminal
-- Verify all imports are correct
+<details>
+<summary><strong>Styling issues</strong></summary>
 
-### Debug Mode
+1. Clear browser cache and restart dev server
+2. Check SCSS compilation in terminal
+3. Verify all imports are correct
+4. Check for CSS conflicts in browser DevTools
+</details>
 
-Enable detailed logging:
-// Add to main.tsx for development
-if (import.meta.env.DEV) {
-console.log('🔍 Debug mode enabled');
-}
+## 🚀 Deployment
 
-## 🚀 Production Deployment
+### Production Build
 
-### Build Optimization
-
+```bash
 npm run build
+```
 
 ### Environment Variables
 
-Production settings
+```env
+# Production settings
 VITE_API_URL=https://your-backend-domain.com
-VITE_SOCKET_URLhttps://your-backend-domain.com
+VITE_SOCKET_URL=https://your-backend-domain.com
+```
 
 ### Performance Features
+- 📦 Code splitting for faster loads
+- 🗜️ Asset optimization via Vite
+- 💾 Browser caching for static resources
 
-- 📦 **Code splitting** for faster initial loads
-- 🗜️ **Asset optimization** via Vite
-- 💾 **Browser caching** for static resources
+---
 
-**Ready to chat?**
-Start your development server and begin conversing with your AI
+<div align="center">
+
+**Ready to chat?** 🚀
+
+Start your development server and begin conversing with your AI news assistant!
+
+[Report Bug](../../issues) · [Request Feature](../../issues) · [Documentation](../../wiki)
+
+</div>
