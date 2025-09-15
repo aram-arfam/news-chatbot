@@ -63,34 +63,35 @@ Your chat interface will be available at `http://localhost:5173`
 
 ## 🏗️ Project Structure
 
+```bash
 frontend/
 ├── src/
-│ ├── components/ # React UI components
-│ │ ├── ChatInterface.tsx
-│ │ ├── MessageList.tsx
-│ │ ├── MessageInput.tsx
-│ │ └── TypingIndicator.tsx
-│ ├── context/ # React Context providers
-│ │ └── SocketContext.tsx
-│ ├── hooks/ # Custom React hooks
-│ │ ├── useChat.ts
-│ │ └── useSession.ts
-│ ├── services/ # API communication
-│ │ └── api.ts
-│ ├── types/ # TypeScript definitions
-│ │ └── index.ts
-│ ├── utils/ # Helper functions
-│ │ └── sessionUtils.ts
-│ ├── styles/ # SCSS styling
-│ │ ├── \_variables.scss
-│ │ ├── \_mixins.scss
-│ │ ├── \_backgrounds.scss
-│ │ ├── App.scss
-│ │ └── components/ # Component-specific styles
-│ ├── App.tsx # Main application component
-│ └── main.tsx # Application entry point
-├── index.html # HTML template
-├── package.json # Dependencies & scripts
+│   ├── components/          # React UI components
+│   │   ├── ChatInterface.tsx
+│   │   ├── MessageList.tsx
+│   │   ├── MessageInput.tsx
+│   │   └── TypingIndicator.tsx
+│   ├── context/             # React Context providers
+│   │   └── SocketContext.tsx
+│   ├── hooks/               # Custom React hooks
+│   │   ├── useChat.ts
+│   │   └── useSession.ts
+│   ├── services/            # API communication
+│   │   └── api.ts
+│   ├── types/               # TypeScript definitions
+│   │   └── index.ts
+│   ├── utils/               # Helper functions
+│   │   └── sessionUtils.ts
+│   ├── styles/              # SCSS styling
+│   │   ├── _variables.scss
+│   │   ├── _mixins.scss
+│   │   ├── _backgrounds.scss
+│   │   ├── App.scss
+│   │   └── components/      # Component-specific styles
+│   ├── App.tsx              # Main application component
+│   └── main.tsx             # Application entry point
+├── index.html               # HTML template
+├── package.json             # Dependencies & scripts
 
 ## 🎨 Tech Stack
 
