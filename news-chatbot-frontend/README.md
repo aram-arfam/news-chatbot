@@ -56,15 +56,16 @@ This frontend application provides:
 git clone <your-repo-url>
 cd news-chatbot-frontend
 npm install
+```
 
-2. Environment Setup
+### 2. Environment Setup
 
 Create a .env file:
 
 VITE_API_URL=http://localhost:3001
 VITE_SOCKET_URL=http://localhost:3001
 
-3. Start Development Server
+### 3. Start Development Server
 
 npm run dev
 
@@ -72,7 +73,7 @@ npm run dev
 
 ⸻
 
-🏗️ Project Structure
+### 🏗️ Project Structure
 
 frontend/
 ├── src/
@@ -106,7 +107,7 @@ frontend/
 
 ⸻
 
-🎨 Tech Stack
+###🎨 Tech Stack
 	•	Frontend Framework: React 18 with TypeScript
 	•	Real-time Communication: Socket.IO Client
 	•	Styling: SCSS with component modules
@@ -134,7 +135,7 @@ Session Management
 
 ⸻
 
-🛠️ Available Scripts
+###🛠️ Available Scripts
 
 Development
 
@@ -148,7 +149,7 @@ npm run lint    # Run ESLint
 
 ⸻
 
-🧩 Component Overview
+###🧩 Component Overview
 
 💬 ChatInterface
 	•	Orchestrates chat flow
@@ -171,7 +172,7 @@ npm run lint    # Run ESLint
 
 ⸻
 
-🎨 SCSS Architecture
+###🎨 SCSS Architecture
 
 styles/
 ├── _variables.scss   # Colors, fonts, breakpoints
@@ -192,7 +193,7 @@ Design System
 
 ⸻
 
-🔌 Real-Time Features
+###🔌 Real-Time Features
 
 Socket.IO Events
 
@@ -212,7 +213,7 @@ Connection Management
 
 ⸻
 
-📱 Responsive Design
+###📱 Responsive Design
 	•	Desktop (1200px+) → full layout with sidebar
 	•	Tablet (768px–1199px) → compact layout
 	•	Mobile (320px–767px) → single-column, thumb-optimized
@@ -247,7 +248,7 @@ if (import.meta.env.DEV) {
 
 ⸻
 
-🚀 Production Deployment
+###🚀 Production Deployment
 
 Build
 
@@ -265,7 +266,7 @@ Optimizations
 
 ⸻
 
-✅ Ready to Chat?
+###✅ Ready to Chat?
 
 Start your dev server and begin conversing with your AI-powered news assistant 🎉
 
