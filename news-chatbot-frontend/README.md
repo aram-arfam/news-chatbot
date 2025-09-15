@@ -125,106 +125,112 @@ frontend/
 
 ⸻
 
-🔄 How It Works
+Got it 👍 the issue is that those sections are too flat and text-heavy, so they don’t “breathe” well when someone scans your README on GitHub. Let me restructure them into cleaner, more skimmable blocks with better hierarchy, spacing, and formatting.
 
-Chat Flow
-	1.	👤 User types message
-	2.	📨 Sent via Socket.IO to backend
-	3.	⌨️ Show “AI is thinking…” indicator
-	4.	🤖 Receive AI response via Socket.IO
-	5.	✨ Display with typewriter effect
-	6.	📚 Show sources if available
-
-Session Management
-	1.	🆔 Generate unique session ID
-	2.	🔌 Connect to Socket.IO room
-	3.	📚 Load conversation history
-	4.	💬 Ready for real-time chat!
+Here’s an improved version ⬇️
 
 ⸻
 
-###🛠️ Available Scripts
 
-Development
+## 🔄 How It Works
 
-npm run dev     # Start development server
-npm run build   # Build for production
+### 📡 Chat Flow
+1. 👤 **User types a message**
+2. 📨 Sent via **Socket.IO** to backend
+3. ⌨️ Show **“AI is thinking…”** indicator
+4. 🤖 Receive **AI response** via Socket.IO
+5. ✨ Display with **typewriter effect**
+6. 📚 Show **sources** if available
+
+### 💾 Session Management
+1. 🆔 Generate **unique session ID**
+2. 🔌 Connect to **Socket.IO room**
+3. 📚 Load **conversation history**
+4. 💬 Ready for **real-time chat**
+---
+
+## 🛠️ Available Scripts
+
+### Development
+```bash
+npm run dev    # Start development server
+npm run build  # Build for production
 
 Code Quality
 
-npm run lint    # Run ESLint
+npm run lint   # Run ESLint
 
 
 ⸻
 
-###🧩 Component Overview
+🧩 Component Overview
 
 💬 ChatInterface
 	•	Orchestrates chat flow
-	•	Manages messages and input
+	•	Manages messages & input
 	•	Handles session reset
 
 📝 MessageList
 	•	Displays chat history
 	•	Typewriter effect for AI
-	•	Shows sources and timestamps
+	•	Shows sources & timestamps
 
 ⌨️ MessageInput
 	•	Auto-resizing textarea
-	•	Enter-to-send, Shift+Enter for new lines
-	•	Input validation + loading states
+	•	Enter-to-send (Shift+Enter = new line)
+	•	Input validation & loading states
 
 🤖 TypingIndicator
-	•	Animated dots for AI thinking
-	•	Smooth appearance/disappearance
+	•	Animated dots while AI is typing
+	•	Smooth transitions on/off
 
 ⸻
 
-###🎨 SCSS Architecture
+🎨 SCSS Architecture
 
 styles/
-├── _variables.scss   # Colors, fonts, breakpoints
-├── _mixins.scss      # Reusable patterns
-├── _backgrounds.scss # Background gradients & patterns
-├── App.scss          # Global styles
-└── components/       # Component-specific styles
+├── _variables.scss     # Colors, fonts, breakpoints
+├── _mixins.scss        # Reusable patterns
+├── _backgrounds.scss   # Background gradients & patterns
+├── App.scss            # Global styles
+└── components/         # Component-specific styles
     ├── chat-interface.scss
     ├── message-list.scss
     ├── message-input.scss
     └── typing-indicator.scss
 
-Design System
+✨ Design System
 	•	🎨 Modern color palette (dark/light mode)
 	•	📱 Mobile-first responsive design
-	•	✨ Smooth animations & transitions
 	•	🔤 Clear typography hierarchy
+	•	🌀 Smooth animations & transitions
 
 ⸻
 
-###🔌 Real-Time Features
+🔌 Real-Time Features
 
-Socket.IO Events
+📡 Socket.IO Events
 
-Outgoing:
+Outgoing
 	•	join-session → Connect to chat room
 	•	chat-message → Send user message
 
-Incoming:
+Incoming
 	•	session-history → Load past messages
 	•	message-added → Receive new message
 	•	bot-typing → AI thinking status
 
-Connection Management
+⚙️ Connection Management
 	•	🔄 Auto-reconnection
 	•	⚡ Connection status indicators
 	•	🛡️ Error handling & user feedback
 
 ⸻
 
-###📱 Responsive Design
-	•	Desktop (1200px+) → full layout with sidebar
-	•	Tablet (768px–1199px) → compact layout
-	•	Mobile (320px–767px) → single-column, thumb-optimized
+📱 Responsive Design
+	•	Desktop (1200px+) → Full layout with sidebar
+	•	Tablet (768px–1199px) → Compact layout
+	•	Mobile (320px–767px) → Single-column, thumb-friendly
 
 ⸻
 
@@ -239,15 +245,26 @@ Connection Management
 🐛 Troubleshooting
 
 Common Issues
-	•	Socket fails: ensure backend is running
+
+❌ Socket connection fails
+Check backend server:
 
 curl http://localhost:3001/api/health
 
+Verify env variables:
 
-	•	Messages missing: check console for WebSocket errors, verify session ID
-	•	Styling issues: clear cache, restart dev server, check SCSS imports
+echo $VITE_SOCKET_URL
 
-Debug Mode
+❌ Messages not showing
+	•	Check browser console for WebSocket errors
+	•	Verify session ID consistency
+
+❌ Styling broken
+	•	Clear browser cache
+	•	Restart dev server
+	•	Check SCSS imports
+
+🔍 Debug Mode
 
 if (import.meta.env.DEV) {
   console.log("🔍 Debug mode enabled");
@@ -256,7 +273,7 @@ if (import.meta.env.DEV) {
 
 ⸻
 
-###🚀 Production Deployment
+🚀 Production Deployment
 
 Build
 
@@ -274,12 +291,6 @@ Optimizations
 
 ⸻
 
-###✅ Ready to Chat?
+✅ Ready to Chat?
 
 Start your dev server and begin conversing with your AI-powered news assistant 🎉
-
----
-
-This keeps everything in **one `.md` file**, but now it’s **tidy, sectioned, and GitHub-friendly**.  
-
-👉 Do you also want me to add a **table of contents with jump links** at the top (so readers can quickly jump to Features, Setup, Troubleshooting, etc.)? That would make navigation much smoother.
