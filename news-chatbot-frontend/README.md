@@ -73,39 +73,47 @@ npm run dev
 
 ⸻
 
-### 🏗️ Project Structure
+## 🏗️ Project Structure
 
+```bash
 frontend/
 ├── src/
-│   ├── components/          # React UI components
-│   │   ├── ChatInterface.tsx
-│   │   ├── MessageList.tsx
-│   │   ├── MessageInput.tsx
-│   │   └── TypingIndicator.tsx
-│   ├── context/             # React Context providers
-│   │   └── SocketContext.tsx
-│   ├── hooks/               # Custom React hooks
-│   │   ├── useChat.ts
-│   │   └── useSession.ts
-│   ├── services/            # API communication
-│   │   └── api.ts
-│   ├── types/               # TypeScript definitions
+│   ├── components/            # Reusable React UI components
+│   │   ├── ChatInterface.tsx  # Main chat container
+│   │   ├── MessageList.tsx    # Displays chat history
+│   │   ├── MessageInput.tsx   # User input field
+│   │   └── TypingIndicator.tsx# AI typing animation
+│   │
+│   ├── context/               # Global state providers
+│   │   └── SocketContext.tsx  # WebSocket context
+│   │
+│   ├── hooks/                 # Custom React hooks
+│   │   ├── useChat.ts         # Chat state & logic
+│   │   └── useSession.ts      # Session persistence
+│   │
+│   ├── services/              # API communication layer
+│   │   └── api.ts             # Axios-based requests
+│   │
+│   ├── types/                 # TypeScript type definitions
 │   │   └── index.ts
-│   ├── utils/               # Helper functions
-│   │   └── sessionUtils.ts
-│   ├── styles/              # SCSS styling
-│   │   ├── _variables.scss
-│   │   ├── _mixins.scss
-│   │   ├── _backgrounds.scss
-│   │   ├── App.scss
-│   │   └── components/      # Component-specific styles
-│   ├── App.tsx              # Main application component
-│   └── main.tsx             # Application entry point
-├── index.html               # HTML template
-├── package.json             # Dependencies & scripts
-
-
+│   │
+│   ├── utils/                 # Helper utilities
+│   │   └── sessionUtils.ts    # Session handling helpers
+│   │
+│   ├── styles/                # Global & modular SCSS styles
+│   │   ├── _variables.scss    # Theme variables
+│   │   ├── _mixins.scss       # Reusable style patterns
+│   │   ├── _backgrounds.scss  # Background effects
+│   │   ├── App.scss           # Root styles
+│   │   └── components/        # Component-specific styles
+│   │
+│   ├── App.tsx                # Root React component
+│   └── main.tsx               # Application entry point
+│
+├── index.html                 # Base HTML template
+├── package.json               # Project metadata & scripts
 ⸻
+```
 
 ###🎨 Tech Stack
 	•	Frontend Framework: React 18 with TypeScript
