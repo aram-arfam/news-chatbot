@@ -20,7 +20,8 @@ This project is composed of a **React/TypeScript frontend** and a **Node.js/Expr
 
 The application is architected with a clear separation between the frontend client and the backend server, which orchestrates all AI processing and data management.
 
-```mermaid graph
+```mermaid
+graph TD
     A[🌐 React Frontend] -- Socket.IO & HTTP --> B[🚀 Node.js Backend];
     B -- "User Query" --> C[🧠 RAG Pipeline];
     C -- "Semantic Search" --> D[📚 Qdrant Vector DB];
