@@ -15,7 +15,8 @@ This server powers a conversational news chatbot that:
 ## 🏗️ Architecture Overview
 
 The backend is the core of the application, orchestrating data flow between the user, the AI models, the vector database, and the cache.
-
+```mermaid
+graph TD
     A[🌐 Frontend Client] -- Socket.IO & HTTP --> B{Node.js Server};
     B -- "User Query" --> C[🧠 RAG Pipeline];
     C -- "Search Vector" --> D[📚 Qdrant Vector DB];
@@ -26,7 +27,7 @@ The backend is the core of the application, orchestrating data flow between the 
     B -- "Store Session" --> F[⚡ Redis Cache];
     F -- "Retrieve History" --> B;
     B -- "Real-time Message" --> A;
-
+```
 ---
 
 ## 🛠️ Tech Stack
