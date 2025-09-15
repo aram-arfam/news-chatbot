@@ -1,0 +1,162 @@
+// App.scss
+
+@use "variables" as *;
+@use "mixins" as *;
+@use "backgrounds" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family-primary;
+  color: $text-primary;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @include subtle-crosshatch-background;
+}
+
+.app {
+  min-height: 100vh;
+  @include flex-column;
+
+  &__header {
+    background: rgba($bg-surface, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid $border-color;
+    padding: $spacing-md 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    &-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 $spacing-lg;
+      @include flex-between;
+    }
+  }
+
+  &__title {
+    h1 {
+      font-family: $font-family-headings;
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+    }
+    p {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+    }
+  }
+
+  &__status {
+    @include flex-center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-secondary;
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    &.connected {
+      color: $success-color;
+      .status-dot {
+        background-color: $success-color;
+        box-shadow: 0 0 8px $success-color;
+      }
+    }
+
+    &.disconnected {
+      color: $danger-color;
+      .status-dot {
+        background-color: $danger-color;
+        animation: pulse 2s infinite;
+      }
+    }
+  }
+
+  &__main {
+    flex: 1;
+    @include flex-center;
+    padding: $spacing-xl $spacing-lg;
+
+    @include mobile-only {
+      padding: $spacing-md 0;
+    }
+  }
+}
+
+.app-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.connection-header {
+  padding: 8px 16px;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #666;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+
+  &.connected {
+    background: #4caf50;
+  }
+
+  &.disconnected {
+    background: #f44336;
+  }
+}
+
+.chat-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #666;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

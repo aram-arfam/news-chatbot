@@ -1,0 +1,65 @@
+// typing-indicator.scss
+
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.typing-indicator {
+  display: flex;
+  margin-bottom: $spacing-lg;
+  animation: fadeIn 0.4s ease-out;
+
+  &__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    @include flex-center;
+    background: $secondary-color;
+    font-weight: $font-weight-bold;
+    flex-shrink: 0;
+    margin-right: $spacing-sm;
+  }
+
+  &__content {
+    flex: 1;
+  }
+
+  &__bubble {
+    @include message-bubble($bg-muted, $text-primary);
+    max-width: 140px;
+    @include flex-column;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    border-bottom-left-radius: $border-radius-sm;
+  }
+
+  &__dots {
+    display: flex;
+    gap: $spacing-xs;
+    justify-content: center;
+
+    span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: $text-secondary;
+      animation: bounce 1.2s infinite ease-in-out both;
+
+      &:nth-child(1) {
+        animation-delay: -0.24s;
+      }
+      &:nth-child(2) {
+        animation-delay: -0.12s;
+      }
+      &:nth-child(3) {
+        animation-delay: 0s;
+      }
+    }
+  }
+
+  &__text {
+    font-size: $font-size-xs;
+    color: $text-secondary;
+    text-align: center;
+    font-style: italic;
+  }
+}

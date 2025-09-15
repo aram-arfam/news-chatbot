@@ -1,0 +1,43 @@
+{
+  "name": "news-chatbot-backend",
+  "version": "1.0.0",
+  "description": "RAG-powered news chatbot backend",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "build-kb": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "@qdrant/qdrant-js": "^1.15.1",
+    "axios": "^1.12.0",
+    "cheerio": "^1.1.2",
+    "connect-redis": "^9.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.7.0",
+    "morgan": "^1.10.1",
+    "natural": "^8.1.0",
+    "node-html-parser": "^7.0.1",
+    "openai": "^5.20.1",
+    "redis": "^5.8.2",
+    "socket.io": "^4.8.1",
+    "string-strip-html": "^13.4.13",
+    "uuid": "^13.0.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.10"
+  }
+}

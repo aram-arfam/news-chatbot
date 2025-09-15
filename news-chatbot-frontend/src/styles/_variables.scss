@@ -1,0 +1,73 @@
+// _variables.scss
+
+// Colors (Dark Theme)
+$accent-primary: #4a90e2; // A sharp, desaturated blue for primary actions
+$accent-hover: #5aa1f3; // A slightly brighter hover state
+$secondary-color: #394251; // For secondary buttons and elements
+$danger-color: #e57373; // A softer red for dark mode
+$success-color: #81c784; // A softer green
+
+// ✅ NEW: User message gradient colors
+$user-msg-bg-start: #005c97; // A deep, rich blue
+$user-msg-bg-end: #363795; // A subtle indigo/purple
+
+// Background colors
+$bg-main: #181c25; // Main app background
+$bg-surface: #222834; // Chat interface, cards, inputs
+$bg-muted: #2a313e; // Hover states, secondary elements
+
+// Text colors
+$text-primary: #e1e3e6; // Primary text, very light gray
+$text-secondary: #9ea3ae; // Secondary text, hints, timestamps
+$text-accent: $accent-primary;
+$text-white: #ffffff;
+
+// Border colors
+$border-color: #394251; // A slightly visible border
+$border-focus: $accent-primary;
+
+// Typography
+$font-family-primary: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+$font-family-headings: "Merriweather", "Georgia", serif;
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.375rem; // 22px
+$font-size-2xl: 1.75rem; // 28px
+$font-size-3xl: 2.25rem; // 36px
+
+// Font weights
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Spacing
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2rem;
+
+// Border radius
+$border-radius-sm: 4px;
+$border-radius-md: 8px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+$border-radius-2xl: 20px;
+$border-radius-full: 9999px;
+
+// Shadows (subtler for dark mode)
+$shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+$shadow-md: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 10px 20px 0 rgba(0, 0, 0, 0.15);
+
+// Breakpoints (no change needed)
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+
+// Transitions
+$transition-fast: 0.2s ease-in-out;
+$transition-normal: 0.3s ease-in-out;

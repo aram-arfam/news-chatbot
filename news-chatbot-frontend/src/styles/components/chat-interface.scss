@@ -1,0 +1,67 @@
+// chat-interface.scss
+
+@use "../variables" as *;
+@use "../mixins" as *;
+
+.chat-interface {
+  width: 100%;
+  max-width: 840px;
+  height: 80vh;
+  @include card;
+  @include flex-column;
+  overflow: hidden;
+  padding: 0;
+
+  @include mobile-only {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+
+  &__header {
+    @include flex-between;
+    padding: $spacing-md $spacing-lg;
+    border-bottom: 1px solid $border-color;
+    background: $bg-surface;
+    flex-shrink: 0;
+
+    h2 {
+      font-family: $font-family-headings;
+      font-size: $font-size-xl;
+      color: $text-primary;
+      margin: 0;
+      font-weight: $font-weight-bold;
+    }
+  }
+
+  &__reset-btn {
+    font-size: $font-size-sm;
+    padding: $spacing-xs $spacing-sm;
+    background: $secondary-color;
+    color: $text-primary;
+    border: none;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background-color: $danger-color;
+      color: $text-white;
+      transform: scale(1.05);
+    }
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+    @include custom-scrollbar;
+  }
+
+  &__input {
+    border-top: 1px solid $border-color;
+    background: $bg-surface;
+  }
+}
