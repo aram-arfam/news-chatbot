@@ -1,4 +1,3 @@
-// src/App.tsx
 import React from "react";
 import ChatInterface from "./components/ChatInterface";
 import { useSession } from "./hooks/useSession";
@@ -7,13 +6,13 @@ import "./styles/App.scss";
 
 const ChatApp: React.FC = () => {
   const { sessionId, clearSession } = useSession();
-  const { isConnected, connectionStatus } = useSocket(); // Enhanced connection info
+  const { isConnected, connectionStatus } = useSocket();
 
   const handleResetSession = async (): Promise<void> => {
     await clearSession();
   };
 
-  // Enhanced status display
+  // Status display
   const getStatusInfo = () => {
     switch (connectionStatus) {
       case "connected":
@@ -61,7 +60,6 @@ const ChatApp: React.FC = () => {
   );
 };
 
-// ✅ CRITICAL: SocketProvider must be uncommented
 const App: React.FC = () => {
   return (
     <SocketProvider>

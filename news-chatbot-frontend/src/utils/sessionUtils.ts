@@ -1,4 +1,3 @@
-// utils/sessionUtils.ts
 export const getOrCreateSessionId = (): string => {
   let sessionId = localStorage.getItem("chatSessionId");
   if (!sessionId) {

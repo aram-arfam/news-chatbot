@@ -36,7 +36,7 @@ router.post("/", validateMessage, async (req, res) => {
 
     console.log("📝 Chat request received:", { sessionId, message: messageText });
 
-    // ✅ Enhanced input validation
+    //input validation
     if (!sessionId || !messageText || messageText.trim().length === 0) {
       return res.status(400).json({
         success: false,
@@ -44,7 +44,7 @@ router.post("/", validateMessage, async (req, res) => {
       });
     }
 
-    // ✅ Handle very short messages gracefully
+    // Handle very short messages gracefully
     if (messageText.trim().length < 2) {
       const shortMessageResponse = "Hi there! I'm your news assistant. Please ask me about the latest news or current events!";
 
@@ -94,7 +94,7 @@ router.post("/", validateMessage, async (req, res) => {
     console.log("📊 RAG Status:", ragStatus);
 
     if (!ragStatus.initialized) {
-      // ✅ Stop typing for fallback response
+      // Stop typing for fallback response
       if (io) {
         io.to(sessionId).emit("bot-typing", false);
         console.log("🛑 Stopped typing indicator (RAG not ready)");
@@ -124,12 +124,12 @@ router.post("/", validateMessage, async (req, res) => {
       });
     }
 
-    // ✅ Process RAG query (typing indicator already started)
+    // Process RAG query (typing indicator already started)
     console.log(`🤖 Processing RAG query: ${messageText}`);
     const ragResult = await ragService.query(messageText);
     console.log("✅ RAG query completed");
 
-    // ✅ EMIT TYPING STOP - This was also missing!
+    // EMIT TYPING STOP
     if (io) {
       io.to(sessionId).emit("bot-typing", false);
       console.log("🛑 Stopped typing indicator (response ready)");
@@ -166,7 +166,7 @@ router.post("/", validateMessage, async (req, res) => {
       console.error("API Error response:", error.response.data);
     }
 
-    // ✅ Stop typing on error too!
+    // Stop typing on error
     const io = req.app.get("io");
     if (io && req.body.sessionId) {
       io.to(req.body.sessionId).emit("bot-typing", false);

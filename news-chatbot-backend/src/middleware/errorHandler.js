@@ -22,7 +22,7 @@ class ErrorHandler {
       const ignorePaths = ["/favicon.ico", "/robots.txt", "/apple-touch-icon"];
       const isIgnorablePath = ignorePaths.some((path) => req.url.includes(path));
       if (isIgnorablePath) {
-        return; // Don't log these
+        return;
       }
     }
 
@@ -210,7 +210,7 @@ class ErrorHandler {
         health.services.redis = false;
       }
 
-      // ✅ ADD: Check Qdrant
+      // Check Qdrant
       try {
         const vectorService = (await import("../services/vectorService.js")).default;
         health.services.qdrant = vectorService.isConnected;
@@ -218,7 +218,7 @@ class ErrorHandler {
         health.services.qdrant = false;
       }
 
-      // ✅ ADD: Check AI services
+      // Check AI services
       try {
         health.services.ai = !!(process.env.GEMINI_API_KEY && process.env.JINA_API_KEY);
       } catch (e) {

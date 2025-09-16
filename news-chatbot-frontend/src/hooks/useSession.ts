@@ -10,14 +10,14 @@ export const useSession = (): UseSessionReturn => {
   const [hasJoinedSession, setHasJoinedSession] = useState(false);
   const { socket, isConnected } = useSocket();
 
-  // ✅ SIMPLIFIED: Just use localStorage, no HTTP validation
+  // Just use localStorage, no HTTP validation
   useEffect(() => {
     const existingSessionId = getOrCreateSessionId();
     debugLog(`📋 Using consistent session ID: ${existingSessionId}`);
     setSessionIdState(existingSessionId);
   }, []); // Empty dependency array - run once
 
-  // ✅ Join session only once per session
+  // Join session only once per session
   useEffect(() => {
     if (socket && isConnected && sessionId && !hasJoinedSession) {
       debugLog(`🔌 Joining session once: ${sessionId}`);

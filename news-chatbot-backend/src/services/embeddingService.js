@@ -46,7 +46,7 @@ class EmbeddingService {
         this.apiUrl,
         {
           model: this.model,
-          input: processedTexts, // ✅ Use processed texts
+          input: processedTexts, // Use processed texts
         },
         {
           headers: {
@@ -64,7 +64,7 @@ class EmbeddingService {
 
       const embeddings = response.data.data.map((item) => item.embedding);
 
-      // 🔧 FIXED: Validate each embedding individually
+      // Validate each embedding individually
       for (let i = 0; i < embeddings.length; i++) {
         const embedding = embeddings[i];
         if (!Array.isArray(embedding)) {
@@ -89,7 +89,7 @@ class EmbeddingService {
         data: error.response?.data,
       });
 
-      // 🔧 FIXED: Exponential backoff retry
+      // Exponential backoff retry
       if (retryCount < this.maxRetries && this.isRetryableError(error)) {
         const delay = this.baseRetryDelay * Math.pow(2, retryCount); // Exponential backoff
         console.log(`🔄 Retrying in ${delay}ms... (${error.response?.status || error.code})`);
@@ -101,7 +101,7 @@ class EmbeddingService {
     }
   }
 
-  // 🔧 FIXED: Better error classification
+  // error classification
   isRetryableError(error) {
     const retryableStatuses = [429, 500, 502, 503, 504];
     const retryableCodes = ["ECONNRESET", "ETIMEDOUT", "ECONNABORTED"];

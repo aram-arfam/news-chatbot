@@ -11,7 +11,7 @@ export const useChat = (sessionId: string): UseChatReturn => {
   const [error, setError] = useState<string | null>(null);
   const { socket, isConnected } = useSocket();
 
-  // ✅ Socket event listeners
+  // Socket event listeners
   useEffect(() => {
     if (!socket) return;
 
@@ -92,7 +92,7 @@ export const useChat = (sessionId: string): UseChatReturn => {
     };
   }, [socket]);
 
-  // ✅ Join session when ready
+  //  Join session when ready
   useEffect(() => {
     if (sessionId && socket && isConnected) {
       debugLog(`🔍 Joining session via Socket.io: ${sessionId}`);
@@ -101,7 +101,7 @@ export const useChat = (sessionId: string): UseChatReturn => {
     }
   }, [sessionId, socket, isConnected]);
 
-  // ✅ Send message via Socket.io ONLY
+  //  Send message via Socket.io
   const sendMessage = useCallback(
     async (messageText: string): Promise<void> => {
       if (!messageText.trim() || !socket || !sessionId) return;
@@ -111,7 +111,6 @@ export const useChat = (sessionId: string): UseChatReturn => {
       setError(null);
 
       try {
-        // Send via Socket.io only
         socket.emit("chat-message", {
           sessionId: sessionId,
           message: messageText.trim(),

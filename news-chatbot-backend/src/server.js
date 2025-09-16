@@ -293,7 +293,7 @@ async function initializeRAGService() {
   }
 }
 
-// Graceful shutdown
+// Graceful Shutdown
 process.on("SIGTERM", async () => {
   console.log("🛑 SIGTERM received, shutting down gracefully");
   await redisManager.disconnect();

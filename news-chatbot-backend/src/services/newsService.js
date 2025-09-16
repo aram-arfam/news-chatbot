@@ -37,14 +37,14 @@ class NewsService {
 
       // 🔬 TECHNOLOGY & SCIENCE
       technology: [
-        "https://feeds.arstechnica.com/arstechnica/index", // Ars Technica - Working ✅
-        "https://feeds.techcrunch.com/TechCrunch/", // TechCrunch ✅
-        "https://www.wired.com/feed/rss", // Wired - Working ✅
-        "https://rss.cnet.com/rss/all", // CNET ✅
-        "https://feeds.engadget.com/engladget/latest", // Engadget ✅
-        "https://www.theverge.com/rss/index.xml", // The Verge ✅
-        "https://feeds.feedburner.com/venturebeat/SZYF", // VentureBeat ✅
-        "https://feeds.feedburner.com/TheHackersNews", // Security focus ✅
+        "https://feeds.arstechnica.com/arstechnica/index", // Ars Technica
+        "https://feeds.techcrunch.com/TechCrunch/", // TechCrunch
+        "https://www.wired.com/feed/rss", // Wired
+        "https://rss.cnet.com/rss/all", // CNET
+        "https://feeds.engadget.com/engladget/latest", // Engadget
+        "https://www.theverge.com/rss/index.xml", // The Verge
+        "https://feeds.feedburner.com/venturebeat/SZYF", // VentureBeat
+        "https://feeds.feedburner.com/TheHackersNews", // Security focus
       ],
 
       // 🏥 HEALTH & SCIENCE
@@ -198,7 +198,7 @@ class NewsService {
     }
   }
 
-  // ✅ UPDATED: Enhanced RSS parsing with smart categorization
+  //  Enhanced RSS parsing with smart categorization
   async parseRSSFeed(feedUrl, feedCategory = "general") {
     try {
       console.log(`📡 Fetching RSS feed: ${feedUrl} (${feedCategory})`);
@@ -235,7 +235,7 @@ class NewsService {
         };
 
         if (article.title && article.link && this.isValidUrl(article.link)) {
-          // ✅ SMART CATEGORIZATION: Use content, not just feed source
+          // SMART CATEGORIZATION: Use content, not just feed source
           article.category = this.classifyArticleContent(
             article.title,
             article.description,
@@ -254,7 +254,7 @@ class NewsService {
     }
   }
 
-  // ✅ UPDATED: Ingest news articles with enhanced categorization
+  // Ingest news articles with enhanced categorization
   async ingestNews(targetCount = 150, includeCategories = ["international", "business", "technology", "regional"]) {
     try {
       console.log(`🚀 Starting enhanced news ingestion (target: ${targetCount} articles)`);
@@ -307,7 +307,7 @@ class NewsService {
           try {
             const content = await this.scrapeArticleContent(article.link);
             if (content) {
-              // ✅ POST-PROCESSING CLASSIFICATION: Refine category with full content
+              // POST-PROCESSING CLASSIFICATION: Refine category with full content
               const refinedCategory = this.classifyArticleContent(
                 article.title,
                 article.description,
@@ -318,7 +318,7 @@ class NewsService {
               return {
                 ...article,
                 content,
-                category: refinedCategory, // ✅ Use content-based classification
+                category: refinedCategory, // Use content-based classification
                 originalFeedCategory: article.feedCategory, // Keep for debugging
                 scrapedAt: new Date().toISOString(),
                 wordCount: content.split(" ").length,
@@ -377,7 +377,7 @@ class NewsService {
     }
   }
 
-  // ✅ NEW: Data cleanup utility for existing mislabeled articles
+  // Data cleanup utility for existing mislabeled articles
   async cleanupExistingData() {
     try {
       console.log("🧹 Starting data cleanup and reclassification...");
@@ -423,7 +423,7 @@ class NewsService {
 
   // Utility methods for enhanced processing
   generateArticleId(article) {
-    // ✅ Add defensive checks
+    // Add defensive checks
     if (!article || !article.title || !article.source || !article.pubDate) {
       console.warn("⚠️ Invalid article for ID generation:", article);
       return crypto.createHash("md5").update(`invalid-${Date.now()}`).digest("hex").substring(0, 12);

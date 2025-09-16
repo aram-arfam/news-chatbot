@@ -24,7 +24,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, isTyping }) => {
 
   const simulateTyping = (messageId: string, content: string) => {
     let currentIndex = 0;
-    const typingSpeed = 30; // milliseconds per character
+    const typingSpeed = 15; // milliseconds per character
 
     const typeInterval = setInterval(() => {
       if (currentIndex <= content.length) {

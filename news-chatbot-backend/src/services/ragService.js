@@ -81,7 +81,7 @@ class RAGService {
       // Store in vector database
       await vectorService.storeEmbeddings(allChunks, embeddings, allMetadata);
 
-      // ✅ ADD THIS LINE: Set initialized flag after successful build
+      // Set initialized flag after successful build
       this.isInitialized = true;
 
       console.log("✅ Knowledge base built successfully");
@@ -92,9 +92,7 @@ class RAGService {
     }
   }
 
-  // Retrieve relevant context for query
-
-  // Enhanced retrieveContext with automatic category detection
+  // retrieveContext with automatic category detection
   async retrieveContext(query, topK = 5) {
     try {
       console.log(`🔍 Processing query: "${query}"`);
@@ -203,12 +201,12 @@ class RAGService {
 
       console.log(`🔍 Processing query: ${userQuery}`);
 
-      // ✅ Validate query before processing
+      // Validate query before processing
       if (!userQuery || userQuery.trim().length === 0) {
         throw new Error("Empty query provided");
       }
 
-      // ✅ NEW: Handle greetings and casual messages FIRST
+      // NEW: Handle greetings and casual messages FIRST
       const greetingResponse = this.handleGreetings(userQuery.trim());
       if (greetingResponse) {
         return {
@@ -240,7 +238,7 @@ class RAGService {
     }
   }
 
-  // ✅ ADD: New greeting detection method
+  // New greeting detection method
   handleGreetings(query) {
     const lowerQuery = query.toLowerCase().trim();
 

@@ -30,7 +30,7 @@ class SocketService {
     this.io.on("connection", (socket) => {
       console.log(`👋 User connected: ${socket.id}`);
 
-      // ✅ Session management via Socket.io
+      // Session management via Socket.io
       socket.on("join-session", async (sessionId) => {
         try {
           socket.join(sessionId);
@@ -50,7 +50,6 @@ class SocketService {
       });
 
       // Handle real-time chat messages
-
       socket.on("chat-message", async (data) => {
         try {
           const { sessionId, message } = data;

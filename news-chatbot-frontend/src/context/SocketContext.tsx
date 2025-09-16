@@ -45,7 +45,7 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
       reconnectionDelayMax: 5000,
     });
 
-    // ✅ All event listeners with proper TypeScript types
+    // All event listeners with proper TypeScript types
     newSocket.on("connect", () => {
       criticalLog("✅ Connected to server:", newSocket.id);
       setIsConnected(true);
