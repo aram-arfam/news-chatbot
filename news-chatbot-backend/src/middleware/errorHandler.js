@@ -18,6 +18,14 @@ class ErrorHandler {
   // Log error to file
   async logError(error, req = null, additional = {}) {
     const timestamp = new Date().toISOString();
+    if (error.status === 404 && req) {
+      const ignorePaths = ["/favicon.ico", "/robots.txt", "/apple-touch-icon"];
+      const isIgnorablePath = ignorePaths.some((path) => req.url.includes(path));
+      if (isIgnorablePath) {
+        return; // Don't log these
+      }
+    }
+
     const logEntry = {
       timestamp,
       error: {
@@ -194,13 +202,27 @@ class ErrorHandler {
         },
       };
 
-      // Check services
+      // Check Redis
       try {
-        // Check Redis
         const redisManager = (await import("../config/redis.js")).default;
         health.services.redis = redisManager.isConnected;
       } catch (e) {
         health.services.redis = false;
+      }
+
+      // ✅ ADD: Check Qdrant
+      try {
+        const vectorService = (await import("../services/vectorService.js")).default;
+        health.services.qdrant = vectorService.isConnected;
+      } catch (e) {
+        health.services.qdrant = false;
+      }
+
+      // ✅ ADD: Check AI services
+      try {
+        health.services.ai = !!(process.env.GEMINI_API_KEY && process.env.JINA_API_KEY);
+      } catch (e) {
+        health.services.ai = false;
       }
 
       // Overall status

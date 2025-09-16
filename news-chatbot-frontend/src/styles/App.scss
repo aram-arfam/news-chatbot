@@ -160,3 +160,54 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.app__status {
+  &.connecting .status-dot {
+    background-color: #ffa500;
+    animation: pulse 2s infinite;
+  }
+
+  &.connected .status-dot {
+    background-color: #4caf50;
+  }
+
+  &.disconnected .status-dot {
+    background-color: #f44336;
+    animation: pulse 2s infinite;
+  }
+}
+
+.connection-warning {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff9800;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 1000;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}

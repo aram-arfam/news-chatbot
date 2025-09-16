@@ -5,8 +5,8 @@ import App from "./App";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <SocketProvider>
-      <App />
-    </SocketProvider>
+    {/* <SocketProvider> */}
+    <App />
+    {/* </SocketProvider> */}
   </StrictMode>
 );

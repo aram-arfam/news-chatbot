@@ -3,6 +3,21 @@ import sessionService from "../services/sessionService.js";
 
 const router = express.Router();
 
+// GET /api/session - Session API status
+router.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Session API is running",
+    note: "Available endpoints listed below",
+    endpoints: {
+      "POST /create": "Create new session",
+      "GET /:sessionId/history": "Get session history",
+      "DELETE /:sessionId/clear": "Clear session",
+      "GET /active": "Get all active sessions (debug)",
+    },
+  });
+});
+
 // POST /api/session/create - Create new session
 router.post("/create", async (req, res) => {
   try {

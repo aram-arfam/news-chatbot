@@ -1,15 +1,19 @@
-// context/SocketContext.tsx - IMPROVED VERSION
 import React, { createContext, useContext, useEffect, useState, ReactNode, useRef } from "react";
-import { io, Socket } from "socket.io-client";
+import io from "socket.io-client";
+import { debugLog, criticalLog, criticalError } from "../utils/logger";
+
+type Socket = ReturnType<typeof io>;
 
 interface SocketContextType {
   socket: Socket | null;
   isConnected: boolean;
+  connectionStatus: "connecting" | "connected" | "disconnected";
 }
 
 const SocketContext = createContext<SocketContextType>({
   socket: null,
   isConnected: false,
+  connectionStatus: "connecting",
 });
 
 interface SocketProviderProps {
@@ -19,51 +23,76 @@ interface SocketProviderProps {
 export const SocketProvider: React.FC<SocketProviderProps> = ({ children }) => {
   const [socket, setSocket] = useState<Socket | null>(null);
   const [isConnected, setIsConnected] = useState(false);
-  const initializingRef = useRef(false); // ✅ Prevent multiple initializations
+  const [connectionStatus, setConnectionStatus] = useState<"connecting" | "connected" | "disconnected">("connecting");
+  const initializingRef = useRef(false);
 
   useEffect(() => {
-    // ✅ Prevent multiple socket connections
+    // Prevent multiple socket connections
     if (initializingRef.current || socket) return;
 
     initializingRef.current = true;
-    console.log("🔌 Creating single socket connection...");
+    debugLog("🔌 Creating single socket connection...");
 
-    const newSocket = io("http://localhost:3001", {
+    const newSocket: Socket = io(import.meta.env.VITE_SOCKET_URL || "http://localhost:3001", {
       transports: ["websocket", "polling"],
       timeout: 20000,
-      // ✅ Add these options to improve connection stability
       forceNew: false,
       multiplex: true,
       autoConnect: true,
+      // Production-specific additions
+      reconnectionAttempts: 5,
+      reconnectionDelay: 1000,
+      reconnectionDelayMax: 5000,
     });
 
+    // ✅ All event listeners with proper TypeScript types
     newSocket.on("connect", () => {
-      console.log("✅ Connected to server:", newSocket.id);
+      criticalLog("✅ Connected to server:", newSocket.id);
       setIsConnected(true);
+      setConnectionStatus("connected");
     });
 
-    newSocket.on("disconnect", (reason, details) => {
-      console.log("❌ Disconnected:", reason, details);
+    newSocket.on("disconnect", (reason: string, details?: any) => {
+      criticalLog("❌ Disconnected:", reason, details);
       setIsConnected(false);
+      setConnectionStatus("disconnected");
     });
 
-    newSocket.on("connect_error", (error) => {
-      console.error("❌ Connection error:", error);
+    newSocket.on("connect_error", (error: Error) => {
+      criticalError("❌ Connection error:", error);
       setIsConnected(false);
+      setConnectionStatus("disconnected");
+    });
+
+    newSocket.on("reconnect_attempt", (attemptNumber: number) => {
+      debugLog(`🔄 Reconnection attempt ${attemptNumber}`);
+      setConnectionStatus("connecting");
+    });
+
+    newSocket.on("reconnect_failed", () => {
+      debugLog("❌ Failed to reconnect");
+      setConnectionStatus("disconnected");
+    });
+
+    newSocket.on("reconnect", (attemptNumber: number) => {
+      criticalLog(`✅ Reconnected after ${attemptNumber} attempts`);
+      setIsConnected(true);
+      setConnectionStatus("connected");
     });
 
     setSocket(newSocket);
 
     return () => {
-      console.log("🧹 Cleaning up socket connection");
+      debugLog("🧹 Cleaning up socket connection");
       initializingRef.current = false;
       newSocket.disconnect();
       setSocket(null);
       setIsConnected(false);
+      setConnectionStatus("connecting");
     };
-  }, []); // ✅ Empty dependency array - create socket only once
+  }, []);
 
-  return <SocketContext.Provider value={{ socket, isConnected }}>{children}</SocketContext.Provider>;
+  return <SocketContext.Provider value={{ socket, isConnected, connectionStatus }}>{children}</SocketContext.Provider>;
 };
 
 export const useSocket = () => {

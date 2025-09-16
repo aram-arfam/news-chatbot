@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { ApiResponse, ChatResponse, ChatSession } from "../types";
 
-const BASE_URL = "http://localhost:3001/api";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL + "/api";
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -43,3 +43,14 @@ export const sessionApi = {
     return response.data;
   },
 };
+
+// response interceptor
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 503) {
+      console.warn("Service temporarily unavailable");
+    }
+    return Promise.reject(error);
+  }
+);

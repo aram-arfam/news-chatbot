@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { UseSessionReturn } from "../types";
 import { getOrCreateSessionId, clearSessionId } from "../utils/sessionUtils";
 import { useSocket } from "../context/SocketContext";
+import { debugLog, criticalError } from "../utils/logger";
 
 export const useSession = (): UseSessionReturn => {
   const [sessionId, setSessionIdState] = useState<string | null>(null);
@@ -12,14 +13,14 @@ export const useSession = (): UseSessionReturn => {
   // ✅ SIMPLIFIED: Just use localStorage, no HTTP validation
   useEffect(() => {
     const existingSessionId = getOrCreateSessionId();
-    console.log(`📋 Using consistent session ID: ${existingSessionId}`);
+    debugLog(`📋 Using consistent session ID: ${existingSessionId}`);
     setSessionIdState(existingSessionId);
   }, []); // Empty dependency array - run once
 
   // ✅ Join session only once per session
   useEffect(() => {
     if (socket && isConnected && sessionId && !hasJoinedSession) {
-      console.log(`🔌 Joining session once: ${sessionId}`);
+      debugLog(`🔌 Joining session once: ${sessionId}`);
       socket.emit("join-session", sessionId);
       setHasJoinedSession(true);
     }
@@ -43,9 +44,9 @@ export const useSession = (): UseSessionReturn => {
       const newSessionId = getOrCreateSessionId();
       setSessionIdState(newSessionId);
 
-      console.log(`🗑️ Session cleared and recreated: ${newSessionId}`);
+      debugLog(`🗑️ Session cleared and recreated: ${newSessionId}`);
     } catch (error) {
-      console.error("Failed to clear session:", error);
+      criticalError("Failed to clear session:", error);
     }
   }, [sessionId, socket]);
 

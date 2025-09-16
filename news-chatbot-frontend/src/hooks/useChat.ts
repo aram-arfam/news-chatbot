@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { ChatMessage, UseChatReturn } from "../types";
 import { useSocket } from "../context/SocketContext";
+import { debugLog, criticalLog, criticalError } from "../utils/logger";
 
 export const useChat = (sessionId: string): UseChatReturn => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -15,7 +16,7 @@ export const useChat = (sessionId: string): UseChatReturn => {
     if (!socket) return;
 
     const handleSessionHistory = (history: any) => {
-      console.log("📚 Received chat history via Socket.io:", history);
+      debugLog("📚 Received chat history via Socket.io:", history);
       setIsLoading(false);
 
       if (history && history.exists && history.messages) {
@@ -35,7 +36,7 @@ export const useChat = (sessionId: string): UseChatReturn => {
     };
 
     const handleMessageAdded = (message: any) => {
-      console.log("📥 New message via Socket.io:", message);
+      debugLog("📥 New message via Socket.io:", message);
 
       const formattedMessage: ChatMessage = {
         id: message.messageId || `msg-${Date.now()}-${Math.random()}`,
@@ -58,19 +59,19 @@ export const useChat = (sessionId: string): UseChatReturn => {
     };
 
     const handleBotTyping = (typing: boolean) => {
-      console.log("🤖 Bot typing status:", typing);
+      debugLog("🤖 Bot typing status:", typing);
       setIsTyping(typing);
     };
 
     const handleError = (error: any) => {
-      console.error("Socket error:", error);
+      criticalError("Socket error:", error);
       setError(error.message || "Connection error occurred");
       setIsLoading(false);
       setIsTyping(false);
     };
 
     const handleSessionReset = () => {
-      console.log("🔄 Session reset received via Socket.io");
+      debugLog("🔄 Session reset received via Socket.io");
       setMessages([]);
       setError(null);
     };
@@ -94,7 +95,7 @@ export const useChat = (sessionId: string): UseChatReturn => {
   // ✅ Join session when ready
   useEffect(() => {
     if (sessionId && socket && isConnected) {
-      console.log(`🔍 Joining session via Socket.io: ${sessionId}`);
+      debugLog(`🔍 Joining session via Socket.io: ${sessionId}`);
       setIsLoading(true);
       socket.emit("join-session", sessionId);
     }
@@ -116,7 +117,7 @@ export const useChat = (sessionId: string): UseChatReturn => {
           message: messageText.trim(),
         });
       } catch (err) {
-        console.error("Error sending message:", err);
+        criticalError("Error sending message:", err);
         setError("Failed to send message");
         setIsLoading(false);
         setIsTyping(false);

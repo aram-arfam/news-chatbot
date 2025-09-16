@@ -26,8 +26,149 @@ const io = socketService.initialize(server);
 app.set("io", io);
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.NODE_ENV === "production" ? process.env.FRONTEND_URL : ["http://localhost:5173", "http://localhost:3000"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  })
+);
 app.use(express.json());
+
+// Welcome endpoint
+app.get("/", (req, res) => {
+  res.json({
+    service: "News Chatbot API",
+    version: "1.0.0",
+    status: "operational",
+    uptime: `${Math.floor(process.uptime())} seconds`,
+    timestamp: new Date().toISOString(),
+    description: "AI-powered news chatbot backend service with RAG (Retrieval-Augmented Generation)",
+    baseURL: req.protocol + "://" + req.get("host"),
+
+    // Core API Endpoints
+    endpoints: {
+      // Health & Monitoring
+      health: {
+        method: "GET",
+        path: "/api/health",
+        description: "API health check and service status",
+        response: "Service health metrics and dependencies status",
+      },
+
+      // Chat API
+      chat: {
+        method: "POST",
+        path: "/api/chat",
+        description: "Send user messages and get AI-powered responses",
+        requires: ["sessionId", "message"],
+        response: "AI-generated response with sources",
+      },
+      chatInfo: {
+        method: "GET",
+        path: "/api/chat",
+        description: "Get chat API information and available endpoints",
+      },
+      chatStatus: {
+        method: "GET",
+        path: "/api/chat/status",
+        description: "Get RAG pipeline status and initialization state",
+      },
+      chatRebuild: {
+        method: "POST",
+        path: "/api/chat/rebuild",
+        description: "Rebuild knowledge base from latest news sources",
+        note: "Takes 5-10 minutes to complete",
+      },
+
+      // Session Management
+      sessionCreate: {
+        method: "POST",
+        path: "/api/session/create",
+        description: "Create a new chat session",
+        optional: ["sessionId"],
+      },
+      sessionInfo: {
+        method: "GET",
+        path: "/api/session",
+        description: "Get session API information",
+      },
+      sessionHistory: {
+        method: "GET",
+        path: "/api/session/:sessionId/history",
+        description: "Retrieve chat history for a specific session",
+      },
+      sessionClear: {
+        method: "DELETE",
+        path: "/api/session/:sessionId/clear",
+        description: "Clear all messages from a session",
+      },
+      sessionActive: {
+        method: "GET",
+        path: "/api/session/active",
+        description: "List all active sessions (debug endpoint)",
+      },
+
+      // System Management
+      cacheWarm: {
+        method: "GET",
+        path: "/api/cache/warm",
+        description: "Warm cache with popular queries",
+      },
+      cacheStats: {
+        method: "GET",
+        path: "/api/cache/stats",
+        description: "Get Redis cache usage statistics",
+      },
+      socketStats: {
+        method: "GET",
+        path: "/api/socket/stats",
+        description: "Get WebSocket connection statistics",
+      },
+
+      // Vector Database Management
+      recreateCollection: {
+        method: "POST",
+        path: "/api/chat/recreate-collection",
+        description: "Recreate Qdrant vector collection",
+      },
+      clearCollection: {
+        method: "DELETE",
+        path: "/api/chat/collection",
+        description: "Clear all vectors from knowledge base",
+      },
+    },
+
+    // Technology Stack
+    stack: {
+      runtime: "Node.js",
+      framework: "Express.js",
+      ai: "Google Gemini + Jina Embeddings",
+      vectorDB: "Qdrant Cloud",
+      cache: "Redis Cloud",
+      realtime: "Socket.IO",
+    },
+
+    // Usage Examples
+    examples: {
+      healthCheck: "GET /api/health",
+      createSession: 'POST /api/session/create {"sessionId": "optional-id"}',
+      sendMessage: 'POST /api/chat {"sessionId": "your-session", "message": "What\'s the latest tech news?"}',
+      getHistory: "GET /api/session/your-session-id/history",
+    },
+
+    // Quick Start
+    quickStart: ["1. Check health: GET /api/health", "2. Create session: POST /api/session/create", "3. Send message: POST /api/chat with sessionId and message", "4. View history: GET /api/session/{sessionId}/history"],
+
+    // Support Information
+    support: {
+      documentation: "Available at root endpoint (/)",
+      webSocketSupport: true,
+      rateLimiting: "100 requests per 15 minutes per IP",
+      cors: "Enabled for localhost:5173",
+    },
+  });
+});
 
 // Rate limiting
 app.use("/api/chat", (req, res, next) => {
@@ -70,7 +211,6 @@ app.use(errorHandler.notFoundHandler);
 app.use(errorHandler.handleError);
 
 // Initialize services
-// Enhanced server startup with proper Qdrant connection
 async function startServer() {
   try {
     console.log("🚀 Starting server initialization...");
@@ -78,10 +218,10 @@ async function startServer() {
     // Connect to Redis
     await redisManager.connect();
 
-    // ✅ CRITICAL FIX: Connect to Qdrant with retry logic
+    // Connect to Qdrant with retry logic
     await connectToQdrantWithRetry();
 
-    // ✅ CRITICAL FIX: Initialize RAG service after connection
+    // Initialize RAG service after connection
     await initializeRAGService();
 
     // Warm cache
@@ -98,7 +238,7 @@ async function startServer() {
   }
 }
 
-// ✅ NEW: Qdrant connection with retry logic
+// Qdrant connection with retry logic
 async function connectToQdrantWithRetry() {
   const maxRetries = 5;
   let attempt = 0;
@@ -130,7 +270,7 @@ async function connectToQdrantWithRetry() {
   }
 }
 
-// ✅ NEW: Initialize RAG service after successful connection
+// Initialize RAG service after successful connection
 async function initializeRAGService() {
   try {
     console.log("🧠 Initializing RAG service...");

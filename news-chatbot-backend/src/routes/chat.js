@@ -5,6 +5,19 @@ import vectorService from "../services/vectorService.js";
 
 const router = express.Router();
 
+router.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Chat API is running",
+    note: "Use POST to send messages",
+    endpoints: {
+      "POST /": "Send chat messages",
+      "GET /status": "Check RAG pipeline status",
+      "POST /rebuild": "Rebuild knowledge base",
+    },
+  });
+});
+
 // POST /api/chat - Send message and get RAG response
 router.post("/", async (req, res) => {
   try {
