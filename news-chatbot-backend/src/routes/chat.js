@@ -2,6 +2,7 @@ import express from "express";
 import sessionService from "../services/sessionService.js";
 import ragService from "../services/ragService.js";
 import vectorService from "../services/vectorService.js";
+import { validateMessage } from "../middleware/validation.js";
 
 const router = express.Router();
 
@@ -19,7 +20,7 @@ router.get("/", (req, res) => {
 });
 
 // POST /api/chat - Send message and get RAG response
-router.post("/", async (req, res) => {
+router.post("/", validateMessage, async (req, res) => {
   try {
     const { sessionId, message, userMessage } = req.body;
     const messageText = message || userMessage;
