@@ -5,6 +5,37 @@ This project is composed of a **React/TypeScript frontend** and a **Node.js/Expr
 
 ---
 
+## 🌐 Live Demo
+
+Experience the AI News Chatbot in action! The application is deployed and fully operational on Render.
+
+### 🚀 Production URLs
+
+| Service      | URL                                                            | Status    | Description                                     |
+| ------------ | -------------------------------------------------------------- | --------- | ----------------------------------------------- |
+| **Frontend** | [🔗 Live App](https://news-chatbot-frontend-pyd3.onrender.com) | 🟢 Active | React-based user interface with real-time chat  |
+| **Backend**  | [🔗 API Server](https://news-chatbot-server.onrender.com)      | 🟢 Active | Node.js backend with RAG pipeline and Socket.IO |
+
+### ⚡ Quick Start
+
+1. **[Launch the App →](https://news-chatbot-frontend-pyd3.onrender.com)** - Start chatting with the AI about the latest news
+2. **API Health Check** - Visit the [backend health endpoint](https://news-chatbot-server.onrender.com/health) to verify server status
+3. **Real-time Experience** - Enjoy instant responses powered by Socket.IO and Google Gemini AI
+
+> **⚠️ Important Note:** If the frontend appears to be loading indefinitely or shows connection errors, please visit the [backend server link](https://news-chatbot-server.onrender.com) first to wake it up. Render puts free-tier services to sleep after periods of inactivity to save memory. Once the backend is awake (you'll see a response), refresh the frontend and it should work perfectly!
+
+> **Note:** Initial load may take 30-60 seconds as Render spins up the free-tier services. Once loaded, the experience is seamless and lightning-fast!
+
+### 🛠️ Deployment Stack
+
+- **Platform:** Render (Frontend & Backend)
+- **Database:** Qdrant Cloud (Vector Search)
+- **Cache:** Redis Cloud (Session Management)
+- **AI:** Google Gemini Pro (Text Generation)
+- **Real-time:** Socket.IO (WebSocket Communication)
+
+---
+
 ## ✨ Core Features
 
 - **🧠 Retrieval-Augmented Generation (RAG):** The backend uses a RAG pipeline to provide answers that are not just generated, but are grounded in a knowledge base of real, up-to-date news articles.
