@@ -19,7 +19,8 @@ class RedisManager {
         username: process.env.REDIS_USERNAME || undefined,
 
         // Redis Cloud typically requires TLS
-        tls: process.env.REDIS_HOST && process.env.REDIS_HOST.includes("redislabs.com") ? {} : undefined,
+        // tls: process.env.REDIS_HOST && process.env.REDIS_HOST.includes("redislabs.com") ? {} : undefined,
+         tls: undefined,
 
         // Connection options for cloud
         connectTimeout: 10000,
